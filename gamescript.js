@@ -1,9 +1,17 @@
-const score = {
-    wins: 0,
-    losses: 0,
-    ties: 0
-};
-
+let score =JSON.parse(localStorage.getItem('score')) || {
+            wins:0,
+            losses:0,
+            ties:0
+        };
+        /* another way to do it for !score
+ if (!score){
+        score={
+            wins:0,
+            losses:0,
+            ties:0
+        };
+ }
+        */
 function play(pmove) {
     const computerMove = move();
     let result = '';
@@ -41,7 +49,7 @@ function play(pmove) {
     } else if (result === 'Tie!') {
         score.ties++;
     }
-
+    localStorage.setItem('score', JSON.stringify(score));
     alert(`You picked ${pmove} \n${computerMove} \n${result} \nWins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`);
 }
 
