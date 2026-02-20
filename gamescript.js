@@ -3,6 +3,7 @@ let score =JSON.parse(localStorage.getItem('score')) || {
             losses:0,
             ties:0
         };
+        updateScore();
         /* another way to do it for !score
  if (!score){
         score={
@@ -50,8 +51,19 @@ function play(pmove) {
         score.ties++;
     }
     localStorage.setItem('score', JSON.stringify(score));
-    alert(`You picked ${pmove} \n${computerMove} \n${result} \nWins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`);
+    updateScore();
+
+    document.querySelector('.js-result').innerHTML = result;
+    document.querySelector('.js-moves').innerHTML = `You picked ${pmove}\n${computerMove}`;
+ 
+    // remove the alert and replace it with the above two lines to display the result and moves on the webpage instead of an alert box.
+
+    // alert(`You picked ${pmove} \n${computerMove} \n${result} \nWins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`);
 }
+function updateScore(){
+            document.querySelector('.js-score')
+          .innerHTML = `Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`;
+        }
 
 function move() {
     const rand = Math.random();
