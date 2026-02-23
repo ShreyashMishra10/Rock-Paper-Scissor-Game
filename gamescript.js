@@ -13,6 +13,23 @@ let score =JSON.parse(localStorage.getItem('score')) || {
         };
  }
         */
+
+ let isAutoPlaying = false;
+ let id;
+function autoplay() {
+    if (!isAutoPlaying) {
+        id = setInterval(function(){
+            const playerMove = move();
+            play(playerMove);
+        }, 1000);
+        isAutoPlaying = true;
+    }
+    else{
+        clearInterval(id);
+        isAutoPlaying = false;
+    }
+}
+
 function play(pmove) {
     pmove = pmove.toLowerCase();
     const computerMove = move();
