@@ -30,6 +30,43 @@ function autoplay() {
     }
 }
 
+document.querySelector('.event-rock').addEventListener('click', ()=>{
+    play('Rock');
+});
+
+document.querySelector('.event-paper').addEventListener('click', ()=>{
+    play('Paper');
+});
+
+document.querySelector('.event-scissors').addEventListener('click', ()=>{
+    play('Scissors');
+});
+
+document.querySelector('.event-reset').addEventListener('click', ()=>{
+    score.wins = 0;
+    score.losses = 0;
+    score.ties = 0;
+    localStorage.removeItem('score');
+    updateScore();
+    document.querySelector('.js-result').innerHTML = '';
+    document.querySelector('.js-moves').innerHTML = '';
+});
+
+document.querySelector('.event-auto-play').addEventListener('click', ()=>{
+    autoplay();
+});
+
+document.body.addEventListener('keydown', (event)=>{
+    if (event.key === 'r') {
+        play('Rock');
+    }   else if (event.key === 'p') {
+        play('Paper');
+    } else if (event.key === 's') {
+        play('Scissors');
+    }
+});
+
+
 function play(pmove) {
     pmove = pmove.toLowerCase();
     const computerMove = move();
